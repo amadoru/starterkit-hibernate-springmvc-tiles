@@ -3,40 +3,40 @@
 <!-- Just a no-brainer sample cache config file -->
 
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="ehcache.xsd" 
-	updateCheck="false"
-	monitoring="autodetect" 
-	dynamicConfig="true">
+    xsi:noNamespaceSchemaLocation="ehcache.xsd" 
+    updateCheck="false"
+    monitoring="autodetect" 
+    dynamicConfig="true">
 
-	<diskStore path="java.io.tmpdir" />
+    <diskStore path="java.io.tmpdir" />
 
-	<defaultCache 
-		maxElementsInMemory="10000" 
-		memoryStoreEvictionPolicy="LFU"
-		eternal="false"
-		timeToIdleSeconds="7200" 
-		timeToLiveSeconds="7200" 
-		overflowToDisk="true" 
-		diskExpiryThreadIntervalSeconds="1200" 
-	/>
+    <defaultCache 
+        maxElementsInMemory="10000" 
+        memoryStoreEvictionPolicy="LFU"
+        eternal="false"
+        timeToIdleSeconds="7200" 
+        timeToLiveSeconds="7200" 
+        overflowToDisk="true" 
+        diskExpiryThreadIntervalSeconds="1200" 
+    />
 
-	<cache
-	    name="org.hibernate.cache.StandardQueryCache"
-	    maxElementsInMemory="5000" 
-		memoryStoreEvictionPolicy="LFU"
-	    eternal="false"
-	    timeToLiveSeconds="7200"
-	    overflowToDisk="true" 
-		diskExpiryThreadIntervalSeconds="1200" />
-	
-	<cache name="com.example.starter.entity.User"
-		maxElementsInMemory="100" 
-		memoryStoreEvictionPolicy="LFU"
+    <cache
+        name="org.hibernate.cache.StandardQueryCache"
+        maxElementsInMemory="5000" 
+        memoryStoreEvictionPolicy="LFU"
+        eternal="false"
+        timeToLiveSeconds="7200"
+        overflowToDisk="true" 
+        diskExpiryThreadIntervalSeconds="1200" />
+    
+    <cache name="com.example.starter.entity.User"
+        maxElementsInMemory="100" 
+        memoryStoreEvictionPolicy="LFU"
         eternal="false"
         timeToIdleSeconds="7200"
         timeToLiveSeconds="7200"
         overflowToDisk="true"
-		diskExpiryThreadIntervalSeconds="1200"/>
+        diskExpiryThreadIntervalSeconds="1200"/>
 
     <cache name="com.example.starter.entity.Role"
         maxElementsInMemory="100" 

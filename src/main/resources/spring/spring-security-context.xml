@@ -26,20 +26,20 @@
         -->
     </security:http>
 
-	<bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
-	    <property name="decisionVoters">
-	        <list>
-	            <bean class="org.springframework.security.web.access.expression.WebExpressionVoter"/>
-	            <bean class="org.springframework.security.access.vote.RoleVoter">
-	                <property name="rolePrefix" value="ROLE_"/> 
-	                <!-- Above is the default behaviour. Mentioning just in case if someone wants to have different prefix
-	                     or no prefix at all. This is specially useful when you want to validate against privileges instead
-	                     of roles.(i.e. You have dynamically defined roles against a set of pre-defined privileges.) -->
-	            </bean>
-	            <bean class="org.springframework.security.access.vote.AuthenticatedVoter"/>
-	        </list>
-	    </property>
-	</bean>
+  <bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+      <property name="decisionVoters">
+          <list>
+              <bean class="org.springframework.security.web.access.expression.WebExpressionVoter"/>
+              <bean class="org.springframework.security.access.vote.RoleVoter">
+                  <property name="rolePrefix" value="ROLE_"/> 
+                  <!-- Above is the default behaviour. Mentioning just in case if someone wants to have different prefix
+                       or no prefix at all. This is specially useful when you want to validate against privileges instead
+                       of roles.(i.e. You have dynamically defined roles against a set of pre-defined privileges.) -->
+              </bean>
+              <bean class="org.springframework.security.access.vote.AuthenticatedVoter"/>
+          </list>
+      </property>
+  </bean>
 
     <security:authentication-manager>
         <security:authentication-provider ref="daoAuthenticationProvider"/>
@@ -65,11 +65,11 @@
     </bean>
      -->
      
-	<!-- Following is an alternative userDetailsService -->
-	<!-- 
-	<Security:user-service id="userDetailsService">
-	    <security:user name="master" password="eb0a191797624dd3a48fa681d3061212" authorities="ROLE_USER, ROLE_ADMIN" />
-	    <security:user name="slave" password="03158cf39c6f316f9ce98a4e034cdc28" authorities="ROLE_USER" />
-	</security:user-service>
+  <!-- Following is an alternative userDetailsService -->
+  <!-- 
+  <Security:user-service id="userDetailsService">
+      <security:user name="master" password="eb0a191797624dd3a48fa681d3061212" authorities="ROLE_USER, ROLE_ADMIN" />
+      <security:user name="slave" password="03158cf39c6f316f9ce98a4e034cdc28" authorities="ROLE_USER" />
+  </security:user-service>
     -->
 </beans>

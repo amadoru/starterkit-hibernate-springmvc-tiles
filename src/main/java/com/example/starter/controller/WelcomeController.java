@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.starter.entity.User;
 import com.example.starter.service.UserService;
 
 /**
@@ -39,7 +40,8 @@ public class WelcomeController {
     @RequestMapping(method = RequestMethod.GET, value = { "welcome" })
     public String showWelcomePage(Model model) {
         logger.debug("Page Request: /welcome.do");
-        model.addAttribute("username", userDetailsService.getCurrentUser().getUsername());
+        User user = userDetailsService.getCurrentUser();
+        model.addAttribute("name", user.getFirstName() + " " + user.getLastName());
         return "user.welcome";
     }
     
@@ -49,7 +51,8 @@ public class WelcomeController {
     @RequestMapping(method = RequestMethod.GET, value = { "admin/welcome" })
     public String showAdminWelcomePage(Model model) {
         logger.debug("Page Request: /admin/welcome.do");
-        model.addAttribute("username", userDetailsService.getCurrentUser().getUsername());
+        User user = userDetailsService.getCurrentUser();
+        model.addAttribute("name", user.getFirstName() + " " + user.getLastName());
         return "admin.welcome";
     }
 }

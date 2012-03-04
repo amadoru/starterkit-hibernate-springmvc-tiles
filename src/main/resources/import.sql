@@ -1,5 +1,5 @@
-insert into APP_USER(USERNAME, PASSWORD, FIRST_NAME, LAST_NAME) values('admin', '21232f297a57a5a743894a0e4a801fc3', 'Some', 'Admin')
-insert into APP_USER(USERNAME, PASSWORD, FIRST_NAME, LAST_NAME) values('user','d6dfb33a2052663df81c35e5496b3b1b', 'Some', 'User')
+insert into APP_USER(USERNAME, PASSWORD, FIRST_NAME, LAST_NAME) values('admin', '21232f297a57a5a743894a0e4a801fc3', 'System', 'Admin')
+insert into APP_USER(USERNAME, PASSWORD, FIRST_NAME, LAST_NAME) values('user','ee11cbb19052e40b07aac0ca060c23ee', 'General', 'User')
 insert into APP_ROLE(ROLENAME) values('ROLE_ADMIN')
 insert into APP_ROLE(ROLENAME) values('ROLE_USER')
 insert into APP_USER_ROLE(USERNAME, ROLENAME) values('admin', 'ROLE_ADMIN')

@@ -12,10 +12,10 @@ import com.example.starter.entity.User;
  * @author Roshan Amadoru
  **/
 public interface UserService {
-	
-	/**
-	 * This method returns the User entity object of the session's signed in user
-	 * @return User entity object of the current session's signed in user
-	 */
-	public User getCurrentUser();
+    
+    /**
+     * This method returns the User entity object of the session's signed in user
+     * @return User entity object of the current session's signed in user
+     */
+    public User getCurrentUser();
 }

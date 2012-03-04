@@ -39,10 +39,10 @@
     
     <!-- Tiles Configurations -->
     <bean class="org.springframework.web.servlet.view.tiles2.TilesConfigurer" id="tilesConfigurer">  
-	    <property name="definitions">  
-	        <list>  
-	            <value>classpath:tiles/*.xml</value>
-	        </list>  
-	    </property>  
+        <property name="definitions">  
+            <list>  
+                <value>classpath:tiles/*.xml</value>
+            </list>  
+        </property>  
     </bean> 
 </beans>

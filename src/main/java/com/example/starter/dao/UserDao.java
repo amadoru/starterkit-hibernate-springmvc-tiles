@@ -19,5 +19,5 @@ public interface UserDao {
      * @param username username of the user which needs to query for
      * @return an instance of User if the user is found, null otherwise
      **/
-	public User findUserByUsername(String username);
+    public User findUserByUsername(String username);
 }

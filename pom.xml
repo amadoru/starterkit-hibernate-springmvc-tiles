@@ -150,12 +150,6 @@
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate.version}</version>
             <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
@@ -163,12 +157,6 @@
             <artifactId>hibernate-ehcache</artifactId>
             <version>${hibernate.version}</version>
             <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!-- Database connection pooling -->
@@ -248,7 +236,7 @@
     </dependencies>
 
     <build>
-        <finalName>starterkit-hibernate-spring-springmvc</finalName>
+        <finalName>starterkit-hibernate-springmvc-tiles</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -260,6 +248,14 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <configuration>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <configuration>
+                    <downloadSource>true</downloadSource>
+                    <downloadJavadocs>true</downloadJavadocs>
                 </configuration>
             </plugin>
         </plugins>
