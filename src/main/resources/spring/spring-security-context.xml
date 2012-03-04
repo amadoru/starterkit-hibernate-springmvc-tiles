@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:security="http://www.springframework.org/schema/security"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/security
+          http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- You can use the following instead of the intercept-url pattern in the next security:http element.
+         However you _must_ bypass security for the login page in order to avoid infinite re-directions. -->
+    <!-- security:http auto-config="true" security="none" pattern="/login.do"/> -->
+    
+    <security:http auto-config="true" access-decision-manager-ref="accessDecisionManager">
+        <security:intercept-url pattern="/login.do" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <security:intercept-url pattern="/*" access="ROLE_USER" />
+        <security:intercept-url pattern="/admin/*" access="ROLE_ADMIN"/>
+        <security:form-login login-page="/login.do"/>
+        <security:access-denied-handler error-page="/error/403.do"/>
+        <!-- Alternatively you can have a custom implementation of AccessDeniedHandler. But you really don't have to.
+             Alternatively you may also define it in the web.xml as an error-page. -->
+        
+        <!-- Enable the following if you want to have a logout success page -->
+        <!-- 
+        <security:logout logout-success-url="/"/>
+        -->
+    </security:http>
+
+	<bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+	    <property name="decisionVoters">
+	        <list>
+	            <bean class="org.springframework.security.web.access.expression.WebExpressionVoter"/>
+	            <bean class="org.springframework.security.access.vote.RoleVoter">
+	                <property name="rolePrefix" value="ROLE_"/> 
+	                <!-- Above is the default behaviour. Mentioning just in case if someone wants to have different prefix
+	                     or no prefix at all. This is specially useful when you want to validate against privileges instead
+	                     of roles.(i.e. You have dynamically defined roles against a set of pre-defined privileges.) -->
+	            </bean>
+	            <bean class="org.springframework.security.access.vote.AuthenticatedVoter"/>
+	        </list>
+	    </property>
+	</bean>
+
+    <security:authentication-manager>
+        <security:authentication-provider ref="daoAuthenticationProvider"/>
+    </security:authentication-manager>
+    
+    <bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+          <property name="userDetailsService" ref="userDetailsService"/>
+          <property name="passwordEncoder" ref="passwordEncoder"/>
+          <!-- Enable the following if you are using a salt with the password encoding -->
+          <!-- <property name="saltSource" ref="saltSource"/> -->
+    </bean>
+    
+    <bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder">
+    </bean>
+    
+    <!-- Enable the following if you are using a salt with the password encoding -->
+    <!-- 
+    <bean id="saltSource" class="org.springframework.security.authentication.dao.ReflectionSaltSource">
+        <property name="userPropertyToUse" value="name"/>
+    </bean>
+    
+    <bean id="userDetailsService" class="com.example.starter.service.UserDetailsService">
+    </bean>
+     -->
+     
+	<!-- Following is an alternative userDetailsService -->
+	<!-- 
+	<Security:user-service id="userDetailsService">
+	    <security:user name="master" password="eb0a191797624dd3a48fa681d3061212" authorities="ROLE_USER, ROLE_ADMIN" />
+	    <security:user name="slave" password="03158cf39c6f316f9ce98a4e034cdc28" authorities="ROLE_USER" />
+	</security:user-service>
+    -->
+</beans>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation=
+        "http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context 
+            http://www.springframework.org/schema/context/spring-context.xsd"
+    default-autowire="byName">
+
+    <!-- Activates scanning of @Autowired -->
+    <context:annotation-config />
+
+    <!-- Activates scanning of @Repository and @Service -->
+    <context:component-scan base-package="com.example.starter" />
+
+    <!-- bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" /-->
+
+    <!-- The bootstrap database password encoder bean. It is needed to encode passwords in database. -->
+    <!-- bean class="com.example.template.security.DatabasePasswordSecurerBean" lazy-init="false" init-method="secureDatabase"
+        depends-on="dataSource">
+        <property name="dataSource" ref="dataSource" />
+    </bean-->
+
+</beans>

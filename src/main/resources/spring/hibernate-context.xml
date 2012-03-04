@@ -1,0 +1,67 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+            http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx 
+            http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop 
+            http://www.springframework.org/schema/aop/spring-aop.xsd"
+    default-autowire="byName">
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>classpath:db.properties</value>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+        destroy-method="close">
+        <property name="driverClassName" value="${db.driverClassName}" />
+        <property name="url" value="${db.url}" />
+        <property name="username" value="${db.username}" />
+        <property name="password" value="${db.password}" />
+    </bean>
+    
+    <bean id="sessionFactory"
+        class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="packagesToScan" value="com.example.starter.entity" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.connection.zeroDateTimeBehavior">convertToNull</prop>
+                <!-- Connection Pool Properties -->
+                <prop key="hibernate.dbcp.maxActive">2</prop>
+                <prop key="hibernate.dbcp.maxIdle">2</prop>
+                <prop key="hibernate.dbcp.maxWait">120000</prop>
+                <prop key="hibernate.dbcp.whenExhaustedAction">1</prop>
+                <prop key="hibernate.dbcp.testOnBorrow">true</prop>
+                <prop key="hibernate.dbcp.testOnReturn">true</prop>
+                <prop key="hibernate.dbcp.validationQuery">select 1;</prop>
+                <prop key="hibernate.dbcp.ps.maxActive">5</prop>
+                <prop key="hibernate.dbcp.ps.maxIdle">5</prop>
+                <prop key="hibernate.dbcp.ps.maxWait">180000</prop>
+                <prop key="hibernate.dbcp.ps.whenExhaustedAction">2</prop>
+                <!-- Cache configuration -->
+                <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+                <prop key="hibernate.cache.use_second_level_cache">true</prop>
+                <prop key="hibernate.cache.use_query_cache">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+
+</beans>
