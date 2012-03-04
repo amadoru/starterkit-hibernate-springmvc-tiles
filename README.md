@@ -30,13 +30,13 @@ This will run the project in a jetty server. Now in your browser, navigate to
 
 Following logins are configured and working in the app.
 
-`Admin User
-Username: admin
-Password: admin`
+    Admin User
+    Username: admin
+    Password: admin
 
-`Normal User
-Username: user
-Password: user`
+    Normal User
+    Username: user
+    Password: user
 
 Licencese
 ---------
